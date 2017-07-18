@@ -1,0 +1,111 @@
+﻿@{
+    List<CoreEntities.Basket> basketlist = Session["basket"] as List<CoreEntities.Basket>;
+}
+<button class="btn btn-primary glyphicon glyphicon-shopping-cart" data-toggle="modal"
+        data-target="#myModal" id="btncart">
+    BASKET
+    <br />
+    <span class="badge pull-right" id="CartCount">
+        @if (basketlist != null)
+        {
+            int count = 0;
+            foreach (var item in basketlist)
+            {
+                count += item.Count;
+            }
+            @count
+        }
+        else
+        {
+            @:0
+        }
+    </span>
+</button>
+
+
+<div class="modal fade" tabindex="-1" role="dialog"
+     id="myModal"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">
+                    Your Basket
+                </h4>
+            </div>
+
+
+            <div class="modal-body">
+
+                @using (Html.BeginForm("Reserv", "Home", FormMethod.Post,
+    new { id = "FormOrder", data_toggle = "validator", role = "form" }))
+                {
+                    <div class="form-group">
+                        <input type="text" name="FirstName" placeholder="enter your FirstName" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="LastName" placeholder="enter your LastName" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="Phone" placeholder="enter you Phone" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">To Order</button>
+                    </div>
+                }
+                <div class="row">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Quantity </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="insTabl">
+                            @{
+                                int i = 1;
+                            }
+
+                            @if (basketlist != null)
+                            {
+                                foreach (var item in basketlist)
+                                {
+                                    <tr>
+                                        <td>@(i++)</td>
+                                        <td>@item.car.Name</td>
+                                        <td class="text-center">@item.car.Price</td>
+                                        <td>@item.Count</td>
+                                        <td><button class="btn btn-default btn-xs" onclick="DelProduct(@item.car.Id,@item.Count)"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                    </tr>
+                                }
+                                decimal summ = 0;
+                                int count = 0;
+                                foreach (var item in basketlist)
+                                {
+                                    count += item.Count;
+                                    summ += item.car.Price * item.Count;
+                                }
+
+                                <tr class="bg-info">
+                                    <td colspan="2"></td>
+                                    <td>@summ</td>
+                                    <td>@count</td>
+                                    <td></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Back to Catalog
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

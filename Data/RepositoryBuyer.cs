@@ -8,16 +8,27 @@ using IRepositories;
 
 namespace Data
 {
-    class RepositoryBuyer:IBuyerRepositor
+    public class RepositoryBuyer:IRepository<Buyer>
     {
         public MyContext context;
 
-        public RepositoryBuyer()
+        public RepositoryBuyer(MyContext newcontext)
         {
-            context = new MyContext();
+            context = newcontext;
         }
 
-        IEnumerable<Buyer> IBuyerRepositor.GetAll()
+        public void CreateEntity(Buyer buyer)
+        {
+            context.DbSetBuyer.Add(buyer);       
+        }
+
+        public Buyer FindOne(dynamic id)
+        {
+            Buyer buyer = context.DbSetBuyer.Find(id);
+            return buyer;
+        }
+
+        public IEnumerable<Buyer> GetAll()
         {
             return context.DbSetBuyer;
         }

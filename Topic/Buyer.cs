@@ -12,6 +12,6 @@ namespace CoreEntities
         public string FirstName {get;set;}
         public string LastName { get; set; }
         public string Phone { get; set; }
-        public string SessionID { get; set; }
+        public string SessionId { get; set; }
     }
 }

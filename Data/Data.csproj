@@ -52,11 +52,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryCar.cs" />
     <Compile Include="RepositoryTransaction.cs" />
+    <Compile Include="UofW.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IOrderProducts\BusinessInterfaces.csproj">
+    <ProjectReference Include="..\IOrderProducts\BusinessLogicInterfaces.csproj">
       <Project>{1a24031b-40e0-40d9-8b5b-201171be0988}</Project>
-      <Name>BusinessInterfaces</Name>
+      <Name>BusinessLogicInterfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\IRepositories\IRepositories.csproj">
       <Project>{1d2df515-b47b-471c-8651-78ac4b794662}</Project>

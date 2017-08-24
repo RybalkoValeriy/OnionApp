@@ -8,8 +8,8 @@ namespace CoreEntities
 {
     public class Basket
     {
-        public string guidSessinoID { get; set; }
-        public Car car { get; set; }
+        public string SessionID { get; set; }
+        public Car Car { get; set; }
         public int Count { get; set; }
     }
 }

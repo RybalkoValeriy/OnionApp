@@ -27,7 +27,7 @@ namespace OnionApp.Util
         }
         private void AddBindings()
         {
-            kernel.Bind<ICarRepository>().To<RepositoryCar>();
+            kernel.Bind<IUofW>().To<UofW>();
         }
     }
 }

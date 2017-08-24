@@ -1,27 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionApp", "OnionApp\OnionApp.csproj", "{BFB89C9B-D2A4-45AF-824E-161D2F767F41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionAppWeb", "OnionApp\OnionAppWeb.csproj", "{BFB89C9B-D2A4-45AF-824E-161D2F767F41}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain Entities", "Domain Entities", "{616D3816-0F70-4289-851E-207C992A0385}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CoreEntities", "CoreEntities", "{616D3816-0F70-4289-851E-207C992A0385}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreEntities", "Topic\CoreEntities.csproj", "{BAC0EBD9-448B-42BD-800C-F6DD9D2006B9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository Interfaces", "Repository Interfaces", "{CA7A6C6F-DD12-4219-9497-9CFA1ACD290F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RepositoryInterfaces", "RepositoryInterfaces", "{CA7A6C6F-DD12-4219-9497-9CFA1ACD290F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRepositories", "IRepositories\IRepositories.csproj", "{1D2DF515-B47B-471C-8651-78AC4B794662}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business Logic Interfaces", "Business Logic Interfaces", "{0F0D98C7-AADC-4729-9DEC-743EF964A46A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogicInterfaces", "BusinessLogicInterfaces", "{0F0D98C7-AADC-4729-9DEC-743EF964A46A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessInterfaces", "IOrderProducts\BusinessInterfaces.csproj", "{1A24031B-40E0-40D9-8B5B-201171BE0988}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicInterfaces", "IOrderProducts\BusinessLogicInterfaces.csproj", "{1A24031B-40E0-40D9-8B5B-201171BE0988}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{0D32D3E1-FD10-41F5-A8BD-AFD8AEDF540F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{AA5CA7BB-EBCD-47D3-AA4A-B8D61CD9A427}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "Business Logic\BusinessLogic.csproj", "{E0F6DEBD-4C1C-4B61-BA9B-3188F9A96794}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionApp.Tests", "OnionApp.Tests\OnionApp.Tests.csproj", "{1A67CEF1-82B7-4BDB-B2F0-28D2A2D72ADB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{E0F6DEBD-4C1C-4B61-BA9B-3188F9A96794}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0F6DEBD-4C1C-4B61-BA9B-3188F9A96794}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0F6DEBD-4C1C-4B61-BA9B-3188F9A96794}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A67CEF1-82B7-4BDB-B2F0-28D2A2D72ADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A67CEF1-82B7-4BDB-B2F0-28D2A2D72ADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A67CEF1-82B7-4BDB-B2F0-28D2A2D72ADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A67CEF1-82B7-4BDB-B2F0-28D2A2D72ADB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

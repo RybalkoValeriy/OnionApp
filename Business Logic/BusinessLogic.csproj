@@ -55,9 +55,13 @@
       <Project>{aa5ca7bb-ebcd-47d3-aa4a-b8d61cd9a427}</Project>
       <Name>Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IOrderProducts\BusinessInterfaces.csproj">
+    <ProjectReference Include="..\IOrderProducts\BusinessLogicInterfaces.csproj">
       <Project>{1a24031b-40e0-40d9-8b5b-201171be0988}</Project>
-      <Name>BusinessInterfaces</Name>
+      <Name>BusinessLogicInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IRepositories\IRepositories.csproj">
+      <Project>{1d2df515-b47b-471c-8651-78ac4b794662}</Project>
+      <Name>IRepositories</Name>
     </ProjectReference>
     <ProjectReference Include="..\Topic\CoreEntities.csproj">
       <Project>{bac0ebd9-448b-42bd-800c-f6dd9d2006b9}</Project>

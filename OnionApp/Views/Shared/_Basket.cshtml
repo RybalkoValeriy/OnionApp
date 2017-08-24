@@ -38,20 +38,25 @@
 
             <div class="modal-body">
 
-                @using (Html.BeginForm("Reserv", "Home", FormMethod.Post,
-    new { id = "FormOrder", data_toggle = "validator", role = "form" }))
+                @using (Html.BeginForm("ReserveOrder", "Basket", FormMethod.Post,
+    new { id = "FormOrder", role = "form" }))// data_toggle = "validator"
                 {
                     <div class="form-group">
-                        <input type="text" name="FirstName" placeholder="enter your FirstName" class="form-control" required />
+                        <input type="text" name="FirstName" placeholder="enter your FirstName" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <input type="text" name="LastName" placeholder="enter your LastName" class="form-control" required />
+                        <input type="text" name="LastName" placeholder="enter your LastName" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <input type="tel" name="Phone" placeholder="enter you Phone" class="form-control" required />
+                        <input type="tel" name="Phone" placeholder="enter you Phone" class="form-control"/>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">To Order</button>
+                    </div>
+                    <div class="from-group">
+                        <div class="alert alert-danger alert-dismissable">
+                            @Html.ValidationSummary(true)
+                        </div>
                     </div>
                 }
                 <div class="row">
@@ -76,10 +81,10 @@
                                 {
                                     <tr>
                                         <td>@(i++)</td>
-                                        <td>@item.car.Name</td>
-                                        <td class="text-center">@item.car.Price</td>
+                                        <td>@item.Car.Name</td>
+                                        <td class="text-center">@item.Car.Price</td>
                                         <td>@item.Count</td>
-                                        <td><button class="btn btn-default btn-xs" onclick="DelProduct(@item.car.Id,@item.Count)"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                        <td><button class="btn btn-default btn-xs" onclick="removeProductFromBasket(@item.Car.Id,@item.Count)"><span class="glyphicon glyphicon-remove"></span></button></td>
                                     </tr>
                                 }
                                 decimal summ = 0;
@@ -87,7 +92,7 @@
                                 foreach (var item in basketlist)
                                 {
                                     count += item.Count;
-                                    summ += item.car.Price * item.Count;
+                                    summ += item.Car.Price * item.Count;
                                 }
 
                                 <tr class="bg-info">

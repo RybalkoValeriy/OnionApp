@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CoreEntities;
 
 namespace IRepositories
 {
-    public interface IBuyerRepositor
+    public interface IRepository<T> where T:class
     {
-        IEnumerable<Buyer> GetAll();
+        IEnumerable<T> GetAll();
+        T FindOne(dynamic id);
+        void CreateEntity(T itm);
     }
 }

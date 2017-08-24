@@ -44,6 +44,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IRepositories\IRepositories.csproj">
+      <Project>{1d2df515-b47b-471c-8651-78ac4b794662}</Project>
+      <Name>IRepositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Topic\CoreEntities.csproj">
       <Project>{bac0ebd9-448b-42bd-800c-f6dd9d2006b9}</Project>
       <Name>CoreEntities</Name>

@@ -6,34 +6,33 @@ using System.Threading.Tasks;
 using BusinessInterfaces;
 using CoreEntities;
 using Data;
+using IRepositories;
 
 namespace BusinessLogic
 {
     public class OrderCar : IOrderProducts
     {
-        public void ToOrder(Buyer buyer, IEnumerable<Basket> basket)
+        public void ToOrder(Buyer buyer, IEnumerable<Basket> basket, IUofW uofw)
         {
-            MyContext context = new MyContext();
-            context.DbSetBuyer.Add(buyer);
+            uofw.repositoryBuyer.CreateEntity(buyer);
             foreach (var item in basket)
             {
-                Transaction tr = new Transaction()
+                Transaction transaction = new Transaction()
                 {
                     Buyer = buyer,
                     Date = DateTime.UtcNow,
-                    SessionID = item.guidSessinoID,
-                    Products = item.car,
-                    Count=item.Count
+                    SessionId = item.SessionID,
+                    Car = item.Car,
+                    Count = item.Count
                 };
 
                 try
                 {
-                    context.DbSetTransaction.Add(tr);
-                    context.SaveChanges();
+                    uofw.repositoryTransaction.CreateEntity(transaction);
+                    uofw.Save();
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
             }

@@ -8,27 +8,30 @@ using IRepositories;
 
 namespace Data
 {
-    public class RepositoryCar : ICarRepository
+    public class RepositoryCar : IRepository<Car>
     {
-        private MyContext context; 
+        public MyContext context;
 
-        public RepositoryCar()
+        public RepositoryCar(MyContext newcontext)
         {
-            context = new MyContext();
+            context = newcontext;
         }
 
-        public Car GetOneCar(int id)
+        public Car FindOne(dynamic id)
         {
-            var r = context.DbSetCar.SingleOrDefault(x=>x.Id==id);
-            return r;
+            Car car = context.DbSetCar.Find(id);
+            return car; 
         }
 
-        IEnumerable<Car> ICarRepository.GetAll()
+        public IEnumerable<Car> GetAll()
         {
             return context.DbSetCar;
         }
 
-
+        public void CreateEntity(Car car)
+        {
+            context.DbSetCar.Add(car);
+        }
 
     }
 

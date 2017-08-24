@@ -8,17 +8,29 @@ using IRepositories;
 
 namespace Data
 {
-    class RepositoryTransaction : ITransactionRepositor
+    public class RepositoryTransaction : IRepository<Transaction>
     {
-        MyContext context;
-        public RepositoryTransaction()
+        public MyContext context;
+
+        public RepositoryTransaction(MyContext newcontext)
         {
-            context = new MyContext();
+            context = newcontext;
+        }
+
+        public Transaction FindOne(dynamic id)
+        {
+            Transaction transaction = context.DbSetTransaction.Find(id);
+            return transaction;
         }
 
         public IEnumerable<Transaction> GetAll()
         {
             return context.DbSetTransaction;
+        }
+
+        public void CreateEntity(Transaction transaction)
+        {
+            context.DbSetTransaction.Add(transaction);
         }
     }
 }

@@ -3,28 +3,24 @@
 @{
     Html.RenderPartial("_Basket");
 }
-
 <h2>Cars</h2>
 <div class="row">
     @foreach (var item in @Model)
     {
         <div class="col-md-5">
             <div class="thumbnail">
-
                 <div class="row">
                     <div class="col-md-4 col-md-push-8">
                         <label style="color:#ed5555; font-size:20px;">$ @item.Price</label>
                     </div>
                 </div>
-
-
                 <img src="~/Content/Images/Ferrari/@item.UrlImage" />
                 <div class="caption">
                     <h3>@item.Name</h3>
                     <p>@(item.Description.Length >= 200 ? @item.Description.Substring(0, 200) : @item.Description)</p>
                 </div>
                 <p>
-                    <button type="button" class="btn btn-primary" data-number="@item.Id" onclick="BtnAdd(this)">Add to cart</button>
+                    <button type="button" class="btn btn-primary" data-number="@item.Id" onclick="addProductToBasket(this)">Add to basket</button>
                 </p>
                 <div class="alert alert-warning alert-dismissable" id="mess-@item.Id">
                     <button type="button" class="close" data-dismiss="alert"
@@ -32,79 +28,18 @@
                         &times;
                     </button>
                 </div>
-
                 <div class="countDiv" id="countDiv-@item.Id">
-                    <button id="btnplas" data-number="@item.Id" onclick="BtnPlas(this)">
-                        +
-                    </button>
+                    <button id="btnplas" data-number="@item.Id" onclick="BtnPlas(this)">+</button>
                     <input type="text" class="countProduct" id="countProduct-@item.Id" maxlength="2" data-number="@item.Id" value="0" disabled />
-                    <button id="btnminus" data-number="@item.Id" onclick="BtnMinus(this)">
-                        -
-                    </button>
+                    <button id="btnminus" data-number="@item.Id" onclick="BtnMinus(this)">-</button>
                 </div>
             </div>
         </div>
     }
 </div>
-<script src="~/Scripts/my.js"></script>
-<script>
-    function ajaxBasket(id, count) {
-        var id = id;
-        var count = count;
-        if (id !== null & count !== null) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "/Home/BasketAdd?id=" + id + "&count=" + count, true);
-            xhr.onreadystatechange = function () {
-                if (xhr.status == 200 && xhr.readyState == 4) {
-                    alert('Product added in basket');
-                    setInterval(AnimateBasketRed, 1000);
-                    setInterval(AnimateBasketBlue, 2000);
+<script src="~/Scripts/ScriptsForApp/OtherFunctions.js"></script>
+<script src="~/Scripts/ScriptsForApp/WorkBasket.js"></script>
 
-                    var data = xhr.responseText;
-                    var tablname = "insTabl";
-                    Insert(data, tablname);
-                }
-            }
-            xhr.send();
-        }
-    }
-
-    function Insert(data, insTabl) {
-        var p = JSON.parse(data);
-        var insTabl = document.getElementById(insTabl);
-        insTabl.innerHTML = '';
-        var fullsumm = 0;
-        var pcount = 0;
-        for (var i = 0; i < p.length; i++) {
-            if (p[i].car !== null) {
-                InsertRowTable(p[i], p[i].car, i + 1);
-                var sm = p[i].car.Price * p[i].Count;
-                fullsumm += parseFloat(sm.toFixed(2));
-                pcount += (p[i].Count);
-            }
-        }
-        insTabl.innerHTML += '<tr class="bg-info"><td colspan="2"></td><td>' + fullsumm + '</td><td>' + pcount + '</td></tr>';
-    }
-
-    function InsertRowTable(object, object2, id) {
-        var insTabl = document.getElementById("insTabl");
-        if (insTabl !== null) {
-            insTabl.innerHTML += '<tr id="product-' + id + '"></tr>';
-            var product = document.getElementById("product-" + id);
-            if (product !== null) {
-                product.innerHTML += '<td>' + id + '</td>';
-                product.innerHTML += '<td>' + object2.Name + '</td>';
-                product.innerHTML += '<td>' + object2.Price + '</td>';
-                product.innerHTML += '<td>' + object.Count + '</td>';
-                product.innerHTML += '<td><button class="btn btn-default btn-xs" onclick="DelProduct(' + object2.Id + ',' + object.Count + ')"><span class="glyphicon glyphicon-remove"></span></button></td>';
-            }
-
-
-        }
-    }
-
-    $.notify("Hello World");
-</script>
 
 
 

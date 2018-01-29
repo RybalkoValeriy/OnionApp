@@ -18,7 +18,6 @@ namespace OnionApp.Tests.Contollers
     {
 
         private Mock<IUofW> mock;
-        private Mock<IRepository<Car>> mockRepositoryCar;
         private HomeController homeController;
 
         IEnumerable<Car> dataCar = new List<Car>
@@ -53,6 +52,7 @@ namespace OnionApp.Tests.Contollers
             // Assert
             Assert.AreEqual("Catalog", resultView.ViewName, " error view Catalog");
             Assert.AreEqual(dataCar, resultView.Model, "model fail");
+            mock.VerifyAll();
         }
     }
 }

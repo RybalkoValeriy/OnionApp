@@ -22,7 +22,6 @@ namespace OnionApp.Controllers
         [HttpPost]
         public ActionResult ReserveOrder([Bind(Include = "FirstName, LastName, Phone")]Buyer model)
         {
-
             if (string.IsNullOrEmpty(model.FirstName))
             {
                 ModelState.AddModelError("", "Enter your name");
@@ -35,14 +34,7 @@ namespace OnionApp.Controllers
             {
                 ModelState.AddModelError("", "Enter your phone");
             }
-            //if (Session["basket"] == null)
-            //{
-            //    ModelState.AddModelError("", "Choose a product");
-            //}
-            //if (Session["basket"] is List<Basket>)
-            //{
-            //    ModelState.AddModelError("", "Unknown error, try again.");
-            //}
+
             if (ModelState.IsValid)
             {
                 Buyer buyer = new Buyer()
@@ -60,7 +52,7 @@ namespace OnionApp.Controllers
                 Session["basket"] = null;
                 return View("OrderIsAccepted");
             }
-            return View("~/Views/Home/Catalog.cshtml",unitOfWork.RepositoryCar.GetAll());
+            return RedirectToAction("Catalog", "Home");
         }
 
         [HttpPost]
@@ -69,16 +61,18 @@ namespace OnionApp.Controllers
             var car = unitOfWork.RepositoryCar.FindOne(id);
             if (car != null)
             {
-                Basket b = new Basket()
+                Basket basket = new Basket()
                 {
                     SessionID = Session.SessionID,
                     Car = car,
                     Count = count
                 };
-                if (b != null)
+                if (basket != null)
                 {
-                    List<Basket> list = new List<Basket>();
-                    list.Add(b);
+                    List<Basket> list = new List<Basket>
+                    {
+                        basket
+                    };
                     if (Session["basket"] != null && Session["basket"] is List<Basket>)
                     {
                         var oldlist = Session["basket"] as List<Basket>;

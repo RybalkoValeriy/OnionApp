@@ -19,7 +19,6 @@ namespace OnionApp.Tests.Contollers
         private BasketController basketController;
         private HomeController homeController;
         private ViewResult viewResult;
-        //private RedirectToRouteResult redirectResult;
         private Buyer buyer;
         private OrderCar orderCar;
          

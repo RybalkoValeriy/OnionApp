@@ -60,13 +60,13 @@ namespace OnionApp.Controllers
                 Session["basket"] = null;
                 return View("OrderIsAccepted");
             }
-            return View("~/Views/Home/Catalog.cshtml",unitOfWork.repositoryCar.GetAll());
+            return View("~/Views/Home/Catalog.cshtml",unitOfWork.RepositoryCar.GetAll());
         }
 
         [HttpPost]
         public JsonResult Add(int id, int count)
         {
-            var car = unitOfWork.repositoryCar.FindOne(id);
+            var car = unitOfWork.RepositoryCar.FindOne(id);
             if (car != null)
             {
                 Basket b = new Basket()

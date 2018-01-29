@@ -16,36 +16,43 @@ namespace OnionApp.Tests.Contollers
     [TestClass]
     public class HomeControllerTest
     {
+
         private Mock<IUofW> mock;
-        private HomeController homecontroller;
-        private ViewResult result;
+        private Mock<IRepository<Car>> mockRepositoryCar;
+        private HomeController homeController;
+
+        IEnumerable<Car> dataCar = new List<Car>
+        {
+            new Car()
+            {
+                Id=1,
+                Name="Audi",
+                Price=1000,
+                Description="descr",
+                UrlImage=""
+            }
+        };
 
         [TestInitialize]
         public void SetupContext()
         {
-            // Arrage
             mock = new Mock<IUofW>();
-            mock.Setup(val => val.repositoryCar.GetAll()).Returns(new List<Car>());
-            homecontroller = new HomeController(mock.Object);
-            
+            mock.Setup(x => x.RepositoryCar.GetAll())
+                .Returns(dataCar);
+            homeController = new HomeController(mock.Object);
+        }
+
+        [TestMethod]
+        public void Catalog_ValidateModelAndView()
+        {
+            // Arrange
+
             // Act
-            result = homecontroller.Catalog() as ViewResult;
-        }
+            var resultView = homeController.Catalog() as ViewResult;
 
-        // return view "Catalog"
-        [TestMethod]
-        public void Catalog_ViewEqualCatalogCshtml()
-        {
             // Assert
-            Assert.AreEqual("Catalog", result.ViewName);
-        }
-
-        // model is not null
-        [TestMethod]
-        public void Catalog_ViewModelNotNull()
-        {
-            // Assert
-            Assert.IsNotNull(result.Model);
+            Assert.AreEqual("Catalog", resultView.ViewName, " error view Catalog");
+            Assert.AreEqual(dataCar, resultView.Model, "model fail");
         }
     }
 }

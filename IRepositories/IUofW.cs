@@ -10,9 +10,9 @@ namespace IRepositories
 {
     public interface IUofW :IDisposable
     {
-        IRepository<Car> repositoryCar { get; }
-        IRepository<Transaction> repositoryTransaction { get; }
-        IRepository<Buyer> repositoryBuyer { get; }
+        IRepository<Car> RepositoryCar { get; set; }
+        IRepository<Transaction> RepositoryTransaction { get; set; }
+        IRepository<Buyer> RepositoryBuyer { get; set; }
         void Save();
     }
 }

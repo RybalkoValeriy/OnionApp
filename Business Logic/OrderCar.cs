@@ -14,7 +14,7 @@ namespace BusinessLogic
     {
         public void ToOrder(Buyer buyer, IEnumerable<Basket> basket, IUofW uofw)
         {
-            uofw.repositoryBuyer.CreateEntity(buyer);
+            uofw.RepositoryBuyer.CreateEntity(buyer);
             foreach (var item in basket)
             {
                 Transaction transaction = new Transaction()
@@ -28,7 +28,7 @@ namespace BusinessLogic
 
                 try
                 {
-                    uofw.repositoryTransaction.CreateEntity(transaction);
+                    uofw.RepositoryTransaction.CreateEntity(transaction);
                     uofw.Save();
                 }
                 catch (Exception)

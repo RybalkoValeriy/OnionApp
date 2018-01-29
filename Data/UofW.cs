@@ -12,23 +12,27 @@ namespace Data
     public class UofW : IUofW, IDisposable
     {
         MyContext db = new MyContext();
-        RepositoryCar repoCar;
-        RepositoryBuyer repoBuyer;
-        RepositoryTransaction repoTrans;
+        IRepository<Car> repoCar;
+        IRepository<Buyer> repoBuyer;
+        IRepository<Transaction> repoTrans;
 
 
-        public IRepository<Car> repositoryCar
+
+        public IRepository<Car> RepositoryCar
         {
             get
             {
                 if (repoCar == null)
                     repoCar = new RepositoryCar(db);
                 return repoCar;
-
+            }
+            set
+            {
+                repoCar = value;
             }
         }
 
-        public IRepository<Buyer> repositoryBuyer
+        public IRepository<Buyer> RepositoryBuyer
         {
             get
             {
@@ -36,10 +40,13 @@ namespace Data
                     repoBuyer = new RepositoryBuyer(db);
                 return repoBuyer;
             }
+            set
+            {
+                repoBuyer = value;
+            }
         }
 
-
-        public IRepository<Transaction> repositoryTransaction
+        public IRepository<Transaction> RepositoryTransaction
         {
             get
             {
@@ -47,8 +54,11 @@ namespace Data
                     repoTrans = new RepositoryTransaction(db);
                 return repoTrans;
             }
+            set
+            {
+                repoTrans = value;
+            }
         }
-
 
         public void Dispose()
         {

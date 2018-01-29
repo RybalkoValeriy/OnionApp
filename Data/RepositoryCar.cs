@@ -10,27 +10,27 @@ namespace Data
 {
     public class RepositoryCar : IRepository<Car>
     {
-        public MyContext context;
+        public MyContext Context;
 
-        public RepositoryCar(MyContext newcontext)
+        public RepositoryCar(MyContext newContext)
         {
-            context = newcontext;
+            Context = newContext;
         }
 
         public Car FindOne(dynamic id)
         {
-            Car car = context.DbSetCar.Find(id);
+            Car car = Context.DbSetCar.Find(id);
             return car; 
         }
 
         public IEnumerable<Car> GetAll()
         {
-            return context.DbSetCar;
+            return Context.DbSetCar;
         }
 
         public void CreateEntity(Car car)
         {
-            context.DbSetCar.Add(car);
+            Context.DbSetCar.Add(car);
         }
 
     }

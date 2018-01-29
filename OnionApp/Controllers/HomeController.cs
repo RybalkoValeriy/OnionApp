@@ -20,7 +20,7 @@ namespace OnionApp.Controllers
 
         public ActionResult Catalog()
         {
-            var product = unitOfWork.repositoryCar.GetAll();
+            var product = unitOfWork.RepositoryCar.GetAll();
             return View("Catalog",product);
         }
 

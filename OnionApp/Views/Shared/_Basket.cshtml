@@ -42,16 +42,16 @@
     new { id = "FormOrder", role = "form" }))// data_toggle = "validator"
                 {
                     <div class="form-group">
-                        <input type="text" name="FirstName" placeholder="enter your FirstName" class="form-control" />
+                        <input type="text" name="FirstName" id="firstName" placeholder="enter your FirstName" class="form-control" required />
                     </div>
                     <div class="form-group">
-                        <input type="text" name="LastName" placeholder="enter your LastName" class="form-control" />
+                        <input type="text" name="LastName" id="lastName" placeholder="enter your LastName" class="form-control" required/>
                     </div>
                     <div class="form-group">
-                        <input type="tel" name="Phone" placeholder="enter you Phone" class="form-control"/>
+                        <input type="tel" name="Phone" id="Phone" placeholder="enter you Phone" class="form-control" required/>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">To Order</button>
+                        <button type="submit" class="btn btn-primary" id="toOrder">To Order</button>
                     </div>
                     <div class="from-group">
                         <div class="alert alert-danger alert-dismissable">

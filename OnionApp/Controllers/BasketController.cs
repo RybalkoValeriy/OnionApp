@@ -16,7 +16,6 @@ namespace OnionApp.Controllers
         public BasketController(IUofW r)
         {
             unitOfWork = r;
-
         }
 
         [HttpPost]
@@ -35,7 +34,7 @@ namespace OnionApp.Controllers
                 ModelState.AddModelError("", "Enter your phone");
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && Session["basket"] is List<Basket>)
             {
                 Buyer buyer = new Buyer()
                 {
@@ -52,14 +51,15 @@ namespace OnionApp.Controllers
                 Session["basket"] = null;
                 return View("OrderIsAccepted");
             }
-            return RedirectToAction("Catalog", "Home");
+            var modelCar = unitOfWork.RepositoryCar.GetAll();
+            return View("~/Views/Home/Catalog.cshtml", modelCar);
         }
 
         [HttpPost]
         public JsonResult Add(int id, int count)
         {
             var car = unitOfWork.RepositoryCar.FindOne(id);
-            if (car != null)
+            if (car != null && count > 0)
             {
                 Basket basket = new Basket()
                 {

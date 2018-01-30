@@ -1,8 +1,8 @@
-﻿//Добавляет в корзину выбранный товар ajax: id-номер товара, count-количество единиц
+﻿// Добавляет в корзину выбранный товар ajax: id-номер товара, count-количество единиц
 function ajaxBasket(id, count) {
     var id = id;
     var count = count;
-    if ((id !== null & count !== null)&&(id !== undefined & count !== undefined)) {
+    if ((id !== null & count !== null) && (id !== undefined & count !== undefined)) {
         var dataToSend = 'id=' + encodeURIComponent(id) + '&count=' + encodeURIComponent(count);
         var xhr = new XMLHttpRequest();
         xhr.open("POST", '/Basket/Add', true);
@@ -22,7 +22,7 @@ function ajaxBasket(id, count) {
     }
 }
 
-//Вспомогательная функция для вставки данных в таблицу: data-данные, tableName-имя таблицы
+// Вспомогательная функция для вставки данных в таблицу: data-данные, tableName-имя таблицы
 function insertTable(data, tableName) {
     var dataObject = JSON.parse(data);
 
@@ -41,7 +41,7 @@ function insertTable(data, tableName) {
     insTabl.innerHTML += '<tr class="bg-info"><td colspan="2"></td><td>' + fullsumm + '</td><td>' + pcount + '</td></tr>';
 }
 
-//Вспомогательная функция которая добавляет строку в таблицу: object-елемент массива транзакции(сессия, объект-массив товар, номер по списку), object-товар с описанием, id-номер товара в корзине
+// Вспомогательная функция которая добавляет строку в таблицу: object-елемент массива транзакции(сессия, объект-массив товар, номер по списку), object-товар с описанием, id-номер товара в корзине
 function insertRowTable(object, object2, id) {
     var insTabl = document.getElementById("insTabl");
     if (insTabl !== null) {
@@ -57,7 +57,7 @@ function insertRowTable(object, object2, id) {
     }
 }
 
-//Удаление строки из корзины: id-номер count-количество
+// Удаление строки из корзины: id-номер count-количество
 function removeProductFromBasket(id, count) {
     if (id !== null && count !== null) {
         var id = id;
@@ -80,7 +80,7 @@ function removeProductFromBasket(id, count) {
     }
 }
 
-// Добавляем танные в корзину: elem-елемент который был нажат
+// Добавляем данные в корзину: elem-елемент который был нажат
 function addProductToBasket(elem) {
     var idProduct = elem.getAttribute("data-number");
     var inputNumberProduct = document.getElementById("countProduct-" + idProduct);
@@ -101,4 +101,14 @@ function addProductToBasket(elem) {
     else if (warning !== null) {
         warning.innerText = "plase, add count product";
     }
+}
+
+
+var orderElement = document.getElementById("toOrder");
+orderElement.addEventListener("click", validateBuyer);
+// submit ReserveOrdered
+function validateBuyer() {
+    var firstName = document.getElementById("fistName");
+    var lastName = document.getElementById("lasetName");
+    var phone = document.getElementById("phone");
 }

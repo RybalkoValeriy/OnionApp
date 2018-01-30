@@ -22,10 +22,9 @@ namespace BusinessLogic
                     Buyer = buyer,
                     Date = DateTime.UtcNow,
                     SessionId = item.SessionID,
-                    Car = item.Car,
+                    Cars = item.Car,
                     Count = item.Count
                 };
-
                 try
                 {
                     uofw.RepositoryTransaction.CreateEntity(transaction);

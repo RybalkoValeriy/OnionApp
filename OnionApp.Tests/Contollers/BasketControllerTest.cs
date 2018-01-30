@@ -22,7 +22,6 @@ namespace OnionApp.Tests.Contollers
         private Buyer buyer;
         private OrderCar orderCar;
          
-
         [TestInitialize]
         public void SetupContext()
         {

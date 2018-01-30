@@ -16,8 +16,6 @@ namespace Data
         IRepository<Buyer> repoBuyer;
         IRepository<Transaction> repoTrans;
 
-
-
         public IRepository<Car> RepositoryCar
         {
             get
@@ -60,9 +58,24 @@ namespace Data
             }
         }
 
+        private bool isDisposeState = false;
+
+        private void IsDisposable(bool state)
+        {
+            if (!isDisposeState)
+            {
+                if (state)
+                {
+                    db.Dispose();
+                }
+            }
+            isDisposeState = true;
+        }
+
         public void Dispose()
         {
-            throw new NotImplementedException();
+            IsDisposable(true);
+            GC.SuppressFinalize(this);
         }
 
         public void Save()

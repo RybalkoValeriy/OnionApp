@@ -10,7 +10,7 @@ namespace CoreEntities
     {
         public int Id { get; set; }
         public Buyer Buyer { get; set; }
-        public Car Car { get; set; }
+        public Car Cars { get; set; }
         public int Count { get; set; }
         public DateTime Date { get; set; }
         public string SessionId { get; set; }

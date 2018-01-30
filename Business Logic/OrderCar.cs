@@ -14,6 +14,7 @@ namespace BusinessLogic
     {
         public void ToOrder(Buyer buyer, IEnumerable<Basket> basket, IUofW uofw)
         {
+            uofw.
             uofw.RepositoryBuyer.CreateEntity(buyer);
             foreach (var item in basket)
             {
@@ -22,7 +23,7 @@ namespace BusinessLogic
                     Buyer = buyer,
                     Date = DateTime.UtcNow,
                     SessionId = item.SessionID,
-                    Cars = item.Car,
+                    CarId = item.Car.Id,
                     Count = item.Count
                 };
                 try

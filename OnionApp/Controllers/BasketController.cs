@@ -51,6 +51,8 @@ namespace OnionApp.Controllers
                 Session["basket"] = null;
                 return View("OrderIsAccepted");
             }
+
+            ModelState.AddModelError("", "Apparently, something went wrong");
             var modelCar = unitOfWork.RepositoryCar.GetAll();
             return View("~/Views/Home/Catalog.cshtml", modelCar);
         }

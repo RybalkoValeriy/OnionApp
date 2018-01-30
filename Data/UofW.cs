@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CoreEntities;
 using IRepositories;
+using System.Data.Entity;
 
 
 namespace Data
@@ -15,6 +16,8 @@ namespace Data
         IRepository<Car> repoCar;
         IRepository<Buyer> repoBuyer;
         IRepository<Transaction> repoTrans;
+
+        public DbContextTransaction Transaction { get; private set; }
 
         public IRepository<Car> RepositoryCar
         {
@@ -81,6 +84,20 @@ namespace Data
         public void Save()
         {
             db.SaveChanges();
+        }
+
+        public void BeginTransaction()
+        {
+            Transaction = db.Database.BeginTransaction();
+        }
+
+        public void Commit()
+        {
+
+        }
+        public void Rollback()
+        {
+
         }
 
     }

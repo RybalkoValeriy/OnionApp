@@ -14,7 +14,7 @@ namespace IRepositories
         IRepository<Transaction> RepositoryTransaction { get; set; }
         IRepository<Buyer> RepositoryBuyer { get; set; }
         void Save();
-        void Commint();
+        void Commit();
         void Rollback();
         void BeginTransaction();
     }

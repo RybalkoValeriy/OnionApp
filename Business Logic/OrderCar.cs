@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BusinessInterfaces;
 using CoreEntities;
-using Data;
 using IRepositories;
 
 namespace BusinessLogic
@@ -20,21 +16,18 @@ namespace BusinessLogic
                 Transaction transaction = new Transaction()
                 {
                     Buyer = buyer,
-                    Date = DateTime.UtcNow,
-                    SessionId = item.SessionID,
                     Count = item.Count,
-                    Car=item.Car
+                    CarId = item.Car.Id
                 };
-                try
-                {
-                    item.Car.Transaction.Add(transaction);
-                    uofw.RepositoryCar.CreateEntity(item.Car);
-                    uofw.Save();
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
+                uofw.RepositoryTransaction.CreateEntity(transaction);
+            }
+            try
+            {
+                uofw.Save();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }

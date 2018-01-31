@@ -16,7 +16,6 @@ namespace OnionApp.Tests.Contollers
     [TestClass]
     public class HomeControllerTest
     {
-
         private Mock<IUofW> mock;
         private HomeController homeController;
 
@@ -45,10 +44,8 @@ namespace OnionApp.Tests.Contollers
         public void Catalog_ValidateModelAndView()
         {
             // Arrange
-
             // Act
             var resultView = homeController.Catalog() as ViewResult;
-
             // Assert
             Assert.AreEqual("Catalog", resultView.ViewName, " error view Catalog");
             Assert.AreEqual(dataCar, resultView.Model, "model fail");

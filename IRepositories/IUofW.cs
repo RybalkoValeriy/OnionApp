@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using CoreEntities;
 
-
 namespace IRepositories
 {
     public interface IUofW : IDisposable

@@ -18,6 +18,7 @@ namespace OnionApp.Controllers
             unitOfWork = r;
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult ReserveOrder([Bind(Include = "FirstName, LastName, Phone")]Buyer model)
         {
@@ -43,11 +44,16 @@ namespace OnionApp.Controllers
                     LastName = model.LastName,
                     Phone = model.Phone
                 };
-
                 var basket = Session["basket"] as List<Basket>;
                 OrderCar order = new OrderCar();
-                order.ToOrder(buyer, basket, unitOfWork);
-
+                try
+                {
+                    order.ToOrder(buyer, basket, unitOfWork);
+                }
+                catch (Exception ex)
+                {
+                    return View("~/Views/Exeption/Error.cshtml", new HandleErrorInfo(ex, "Home", "Catalog"));
+                }
                 Session["basket"] = null;
                 return View("OrderIsAccepted");
             }
@@ -96,7 +102,6 @@ namespace OnionApp.Controllers
             if (Session["basket"] is List<Basket>)
             {
                 var basketlist = Session["basket"] as List<Basket>;
-
                 var remove = new Basket();
                 foreach (var item in basketlist)
                 {
@@ -108,7 +113,6 @@ namespace OnionApp.Controllers
                 basketlist.Remove(remove);
                 Session["basket"] = basketlist;
             }
-
             return Json(Session["basket"] as List<Basket>);
         }
     }

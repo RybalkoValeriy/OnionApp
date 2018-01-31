@@ -9,11 +9,17 @@ namespace CoreEntities
     public class Transaction
     {
         public int Id { get; set; }
-        public Buyer Buyer { get; set; }
-        //public int CarId { get; set; }
-        public virtual Car Car { get; set; }
         public int Count { get; set; }
-        public DateTime Date { get; set; }
-        public string SessionId { get; set; }
+        public DateTime DateTransaction { get; set; }
+
+        public int BuyerId { get; set; }
+        public Buyer Buyer { get; set; }
+        public int CarId { get; set; }
+        public Car Car { get; set; }
+
+        public Transaction()
+        {
+            DateTransaction = DateTime.UtcNow;
+        }
     }
 }

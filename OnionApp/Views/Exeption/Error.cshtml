@@ -1,0 +1,31 @@
+﻿@model HandleErrorInfo
+
+<style type="text/css">
+    .error-template {
+        padding: 40px 15px;
+        text-align: center;
+    }
+
+    .error-actions {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+        .error-actions .btn {
+            margin-right: 10px;
+        }
+</style>
+
+<div class="error-template">
+    <div class="container">
+        @Html.ActionLink("Back", @Model.ActionName, @Model.ControllerName)
+    </div>
+    <h1>Oops!</h1>
+    <h1>
+        @Model.Exception.Message
+    </h1>
+    <div class="error-details">
+        @Model.Exception.InnerException
+    </div>
+</div>
+

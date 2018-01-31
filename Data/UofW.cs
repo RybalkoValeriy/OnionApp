@@ -12,10 +12,15 @@ namespace Data
 {
     public class UofW : IUofW, IDisposable
     {
-        MyContext db = new MyContext();
+        MyContext db;
         IRepository<Car> repoCar;
         IRepository<Buyer> repoBuyer;
         IRepository<Transaction> repoTrans;
+
+        public UofW()
+        {
+            db = new MyContext();
+        }
 
         public DbContextTransaction Transaction { get; private set; }
 

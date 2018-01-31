@@ -23,6 +23,14 @@ namespace OnionApp.Tests.Contollers
         {
             mock = new Mock<IUofW>();
             basketController = new BasketController(mock.Object);
+
+            var listBasket=new List<Basket>
+            {
+                new Basket
+                {
+                    Car= new Car
+                }
+            }
         }
 
         [TestMethod]

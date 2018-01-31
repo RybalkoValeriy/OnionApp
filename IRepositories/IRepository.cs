@@ -10,5 +10,6 @@ namespace IRepositories
         IEnumerable<T> GetAll();
         T FindOne(dynamic id);
         void CreateEntity(T itm);
+
     }
 }

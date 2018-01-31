@@ -1,4 +1,29 @@
-﻿<h2>Thank you for your order, our manager will contact you</h2>
+﻿@using OnionApp.Models
+@model TransactionResultView
+
+<div class="container">
+    <div class="alert alert-danger alert-dismissable">
+        @Html.ValidationSummary()
+        @Html.ValidationMessageFor(m=>m.FullName)
+    </div>
+    <h2>Thank you for your order, our manager will contact you</h2>
+    <p><strong>Customer:</strong>@Model.FullName</p>
+    <p><strong>Phone number:</strong>@Model.Phone</p>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Model Name</th>
+                <th>Price</th>
+                <th>Count</th>
+                <th>Total Position</th>
+            </tr>
+        </thead>
+        <tr>
+            <td></td>
+        </tr>
+    </table>
+</div>
 
 
 

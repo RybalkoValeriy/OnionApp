@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using CoreEntities;
-using Data;
 using BusinessLogic;
 using IRepositories;
+using OnionApp.Models;
+using BusinessInterfaces;
 
 namespace OnionApp.Controllers
 {
     public class BasketController : Controller
     {
         IUofW unitOfWork;
+        IOrderProducts orderProducts;
         public BasketController(IUofW r)
         {
             unitOfWork = r;
+            this.orderProducts = new OrderCar();
         }
 
         [ValidateAntiForgeryToken]
@@ -45,17 +47,26 @@ namespace OnionApp.Controllers
                     Phone = model.Phone
                 };
                 var basket = Session["basket"] as List<Basket>;
-                OrderCar order = new OrderCar();
+
                 try
                 {
-                    order.ToOrder(buyer, basket, unitOfWork);
+                    orderProducts.ToOrder(buyer, basket, unitOfWork);
                 }
                 catch (Exception ex)
                 {
                     return View("~/Views/Exeption/Error.cshtml", new HandleErrorInfo(ex, "Home", "Catalog"));
                 }
+
+                var buyerLast = unitOfWork.RepositoryBuyer.GetAll().FirstOrDefault(x => x.SessionId == Session.SessionID);
+                TransactionResultView modelTransactions = new TransactionResultView
+                {
+                    FullName = buyerLast.FirstName + ' ' + buyerLast.LastName,
+                    Phone = buyerLast.Phone,
+                    Date = buyer.Transaction.FirstOrDefault().DateTransaction
+                };
+
                 Session["basket"] = null;
-                return View("OrderIsAccepted");
+                return View("OrderIsAccepted", modelTransactions);
             }
 
             ModelState.AddModelError("", "Apparently, something went wrong");

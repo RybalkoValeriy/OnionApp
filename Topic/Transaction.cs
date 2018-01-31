@@ -13,9 +13,9 @@ namespace CoreEntities
         public DateTime DateTransaction { get; set; }
 
         public int BuyerId { get; set; }
-        public Buyer Buyer { get; set; }
+        public virtual Buyer Buyer { get; set; }
         public int CarId { get; set; }
-        public Car Car { get; set; }
+        public virtual Car Car { get; set; }
 
         public Transaction()
         {

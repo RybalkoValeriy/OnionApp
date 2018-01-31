@@ -14,6 +14,6 @@ namespace CoreEntities
         public string Phone { get; set; }
         public string SessionId { get; set; }
 
-        public ICollection<Transaction> Transaction { get; set; }
+        public virtual ICollection<Transaction> Transaction { get; set; }
     }
 }

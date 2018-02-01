@@ -4,11 +4,11 @@
 <div class="container">
     <div class="alert alert-danger alert-dismissable">
         @Html.ValidationSummary()
-        @Html.ValidationMessageFor(m=>m.FullName)
+        @Html.ValidationMessageFor(m => m.FullName)
     </div>
     <h2>Thank you for your order, our manager will contact you</h2>
-    <p><strong>Customer:</strong>@Model.FullName</p>
-    <p><strong>Phone number:</strong>@Model.Phone</p>
+    <p><strong>Customer: </strong>@Model.FullName</p>
+    <p><strong>Phone number: </strong>@Model.Phone</p>
     <table class="table table-dark">
         <thead>
             <tr>
@@ -19,9 +19,23 @@
                 <th>Total Position</th>
             </tr>
         </thead>
-        <tr>
-            <td></td>
-        </tr>
+        <tbody>
+            @{
+                int no = 1;
+                foreach (var item in Model.OrderedCars)
+                {
+                    decimal total = item.Car.Price * item.Count;
+                    <tr>
+                        <td>@no</td>
+                        <td>@item.Car.Name</td>
+                        <td>@item.Car.Price</td>
+                        <td>@item.Count</td>
+                        <td>@total</td>
+                    </tr>
+                    no++;
+                }
+            }
+        </tbody>
     </table>
 </div>
 

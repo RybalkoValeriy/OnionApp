@@ -57,18 +57,41 @@ namespace OnionApp.Controllers
                     return View("~/Views/Exeption/Error.cshtml", new HandleErrorInfo(ex, "Home", "Catalog"));
                 }
 
+                return RedirectToAction("OrderIsAccepted", "Basket", (object)new { session = Session.SessionID });
+            }
+
+            ModelState.AddModelError("", "Apparently, something went wrong");
+            var modelCar = unitOfWork.RepositoryCar.GetAll();
+            return View("~/Views/Home/Catalog.cshtml", modelCar);
+        }
+
+        public ActionResult OrderIsAccepted(string session)
+        {
+            if (session == Session.SessionID)
+            {
+                var orderCar = new List<OrderedCarView>();
                 var buyerLast = unitOfWork.RepositoryBuyer.GetAll().FirstOrDefault(x => x.SessionId == Session.SessionID);
+                foreach (var item in buyerLast.Transaction)
+                {
+                    orderCar.Add
+                        (
+                            new OrderedCarView()
+                            {
+                                Car = item.Car,
+                                Count = item.Count
+                            }
+                        );
+                }
                 TransactionResultView modelTransactions = new TransactionResultView
                 {
                     FullName = buyerLast.FirstName + ' ' + buyerLast.LastName,
                     Phone = buyerLast.Phone,
-                    Date = buyer.Transaction.FirstOrDefault().DateTransaction
+                    Date = buyerLast.Transaction.FirstOrDefault().DateTransaction,
+                    OrderedCars = orderCar
                 };
-
                 Session["basket"] = null;
                 return View("OrderIsAccepted", modelTransactions);
             }
-
             ModelState.AddModelError("", "Apparently, something went wrong");
             var modelCar = unitOfWork.RepositoryCar.GetAll();
             return View("~/Views/Home/Catalog.cshtml", modelCar);

@@ -8,7 +8,7 @@ namespace CoreEntities
 {
     public class Transaction
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public int Count { get; set; }
         public DateTime DateTransaction { get; set; }
 
@@ -19,6 +19,7 @@ namespace CoreEntities
 
         public Transaction()
         {
+            Id = Guid.NewGuid();
             DateTransaction = DateTime.UtcNow;
         }
     }

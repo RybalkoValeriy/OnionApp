@@ -57,7 +57,7 @@ namespace OnionApp.Controllers
                     return View("~/Views/Exeption/Error.cshtml", new HandleErrorInfo(ex, "Home", "Catalog"));
                 }
 
-                return RedirectToAction("OrderIsAccepted", "Basket", (object)new { session = Session.SessionID });
+                return RedirectToAction("OrderIsAccepted", "Basket", new { session = Session.SessionID, trans = buyer.Transaction.FirstOrDefault().Id });
             }
 
             ModelState.AddModelError("", "Apparently, something went wrong");
@@ -65,12 +65,12 @@ namespace OnionApp.Controllers
             return View("~/Views/Home/Catalog.cshtml", modelCar);
         }
 
-        public ActionResult OrderIsAccepted(string session)
+        public ActionResult OrderIsAccepted(string session, Guid trans)
         {
-            if (session == Session.SessionID)
+            if (session == Session.SessionID && trans != null)
             {
                 var orderCar = new List<OrderedCarView>();
-                var buyerLast = unitOfWork.RepositoryBuyer.GetAll().FirstOrDefault(x => x.SessionId == Session.SessionID);
+                var buyerLast = unitOfWork.RepositoryBuyer.GetAll().Where(x => x.SessionId == session && x.Transaction == x.Transaction.FirstOrDefault(t => t.Id == trans)).FirstOrDefault();
                 foreach (var item in buyerLast.Transaction)
                 {
                     orderCar.Add
@@ -89,7 +89,7 @@ namespace OnionApp.Controllers
                     Date = buyerLast.Transaction.FirstOrDefault().DateTransaction,
                     OrderedCars = orderCar
                 };
-                Session["basket"] = null;
+                Session.Abandon();
                 return View("OrderIsAccepted", modelTransactions);
             }
             ModelState.AddModelError("", "Apparently, something went wrong");

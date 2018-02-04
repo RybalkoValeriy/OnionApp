@@ -56,8 +56,8 @@ namespace OnionApp.Controllers
                 {
                     return View("~/Views/Exeption/Error.cshtml", new HandleErrorInfo(ex, "Home", "Catalog"));
                 }
-
-                return RedirectToAction("OrderIsAccepted", "Basket", new { session = Session.SessionID, trans = buyer.Transaction.FirstOrDefault().Id });
+                var trans = buyer.Transaction.Where(t => t.Buyer.SessionId == Session.SessionID).FirstOrDefault().Id;
+                return RedirectToAction("OrderIsAccepted", "Basket", new { session = Session.SessionID,  trans });
             }
 
             ModelState.AddModelError("", "Apparently, something went wrong");
@@ -70,8 +70,9 @@ namespace OnionApp.Controllers
             if (session == Session.SessionID && trans != null)
             {
                 var orderCar = new List<OrderedCarView>();
-                var buyerLast = unitOfWork.RepositoryBuyer.GetAll().Where(x => x.SessionId == session && x.Transaction == x.Transaction.FirstOrDefault(t => t.Id == trans)).FirstOrDefault();
-                foreach (var item in buyerLast.Transaction)
+                var transactions = unitOfWork.RepositoryTransaction.GetAll().ToList().Where(t => t.Id == trans && t.Buyer.SessionId == session);
+
+                foreach (var item in transactions)
                 {
                     orderCar.Add
                         (
@@ -82,11 +83,12 @@ namespace OnionApp.Controllers
                             }
                         );
                 }
+                var transaction = transactions.FirstOrDefault();
                 TransactionResultView modelTransactions = new TransactionResultView
                 {
-                    FullName = buyerLast.FirstName + ' ' + buyerLast.LastName,
-                    Phone = buyerLast.Phone,
-                    Date = buyerLast.Transaction.FirstOrDefault().DateTransaction,
+                    FullName = transaction.Buyer.FirstName + ' ' + transaction.Buyer.LastName,
+                    Phone = transaction.Buyer.Phone,
+                    Date = transaction.DateTransaction,
                     OrderedCars = orderCar
                 };
                 Session.Abandon();

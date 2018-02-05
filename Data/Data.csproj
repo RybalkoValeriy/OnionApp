@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="DatabaseCustomInitilize.cs" />
     <Compile Include="RepositoryBuyer.cs" />
-    <Compile Include="Context.cs" />
+    <Compile Include="MyContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryCar.cs" />
     <Compile Include="RepositoryTransaction.cs" />
